@@ -162,13 +162,11 @@ app.post('/webhook', middleware(lineConfig), (req, res) => {
 
 app.use((err, req, res, next) => {
   if (err instanceof SignatureValidationFailed) {
-    res.status(401).send(err.signature)
-    return
+    return res.status(401).send(err.signature);
   } else if (err instanceof JSONParseError) {
-    res.status(400).send(err.raw)
-    return
+    return res.status(400).send(err.raw);
   }
-  next(err) // will throw default 500
+  next(err); // will throw default 500
 });
 
 // app.listen(8999, () => {
