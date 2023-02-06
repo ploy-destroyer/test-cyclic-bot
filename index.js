@@ -12,6 +12,7 @@ const axios = require('axios');
 const express = require('express');
 const { InteractionType, InteractionResponseType, verifyKeyMiddleware } = require('discord-interactions');
 
+const line = require('@line/bot-sdk');
 const middleware = require('@line/bot-sdk').middleware;
 const lineConfig = {
   channelAccessToken: process.env.CHANNELACCESSTOKEN,
