@@ -127,10 +127,14 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
 
-  return client.replyMessage(event.replyToken, {
-    type: 'text',
-    text: event.message.text
+  return discord_api.post(`/channels/1072008053420986398/messages`, {
+    content:  event.message.text,
   });
+
+  // return client.replyMessage(event.replyToken, {
+  //   type: 'text',
+  //   text: event.message.text
+  // });
 };
 app.post('/webhook', middleware(lineConfig), (req, res) => {
   console.log(req.body.events); // webhook event objects
