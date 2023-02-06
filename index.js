@@ -127,8 +127,19 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
 
-  return discord_api.post(`/channels/1072008053420986398/messages`, {
-    content:  event.message.text,
+  let userName = '';
+  const userId = event.source.userId;
+  switch (userId) {
+    case 'Ue14bf36a037a9e8eceac687206499ea5':
+      userName = 'เนด';
+      break;
+    default:
+      userName = userId;
+  }
+  discord_api.post(`/channels/1072008053420986398/messages`, {
+    content: `${userName}: ${event.message.text}`,
+  }).then(() => {
+    return Promise.resolve(null);
   });
 
   // return client.replyMessage(event.replyToken, {
