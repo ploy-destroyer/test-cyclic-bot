@@ -161,6 +161,7 @@ app.post('/webhook', middleware(lineConfig), (req, res) => {
   //   });
 
     req.body.events.forEach(element => {
+      console.log('element', element);
       handleEvent(element)
       .then(result => res.json(result))
       .catch(err => res.json(err));  
