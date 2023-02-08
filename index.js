@@ -153,9 +153,18 @@ app.post('/webhook', middleware(lineConfig), (req, res) => {
   // console.log(req.body.events); // webhook event objects
   // console.log(req.body.destination); // user ID of the bot (optional)
 
-  Promise
-    .all(req.body.events.map(handleEvent))
-    .then((result) => res.json(result));
+  // Promise
+  //   .all(req.body.events.map(handleEvent))
+  //   .then((result) => res.json(result))
+  //   .catch(er => {
+  //     res.json(er);
+  //   });
+
+    req.body.events.forEach(element => {
+      handleEvent(element)
+      .then(result => res.json(result))
+      .catch(err => res.json(err));  
+    });
 
   // return res.json({});
 });
