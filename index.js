@@ -24,7 +24,7 @@ const app = express();
 
 const discord_api = axios.create({
   baseURL: 'https://discord.com/api/',
-  timeout: 6000,
+  timeout: 12000,
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
