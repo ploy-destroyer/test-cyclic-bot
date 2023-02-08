@@ -24,7 +24,7 @@ const app = express();
 
 const discord_api = axios.create({
   baseURL: 'https://discord.com/api/',
-  timeout: 3000,
+  timeout: 6000,
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
@@ -140,6 +140,8 @@ function handleEvent(event) {
     content: `${userName}: ${event.message.text}`,
   }).then(() => {
     return Promise.resolve(null);
+  }).catch(er => {
+    return Promise.reject(er);
   });
 
   // return client.replyMessage(event.replyToken, {
@@ -148,8 +150,8 @@ function handleEvent(event) {
   // });
 };
 app.post('/webhook', middleware(lineConfig), (req, res) => {
-  console.log(req.body.events); // webhook event objects
-  console.log(req.body.destination); // user ID of the bot (optional)
+  // console.log(req.body.events); // webhook event objects
+  // console.log(req.body.destination); // user ID of the bot (optional)
 
   Promise
     .all(req.body.events.map(handleEvent))
